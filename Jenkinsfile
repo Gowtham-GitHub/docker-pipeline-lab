@@ -8,7 +8,7 @@ pipeline {
         }
         stage ("maven build") {
             tools {
-                maven 'maven-3.6.2'
+                maven 'maven-3.8.2'
                 jdk 'JDK1.8'
             }
             steps {
