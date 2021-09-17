@@ -20,12 +20,12 @@ pipeline {
         }
         stage ("Build the Docker Image") {
             steps {
-                sh "docker build . -t vishwacloudlab/tomcat-b15"
+                sh "sudo docker build . -t vishwacloudlab/tomcat-b15"
             }
         }
         stage ("Run the Container") {
             steps {
-                sh "docker run -d -p 90:8080 --name cont01 vishwacloudlab/tomcat-b15"
+                sh "sudo docker run -d -p 90:8080 --name cont01 vishwacloudlab/tomcat-b15"
             }
         }
       //  stage ("Check the webpage") {
@@ -36,17 +36,19 @@ pipeline {
       //  }
         stage ("Push to Docker HUB") {
             steps {
+                withDockerRegistry(credentialsId: 'DockerHub', url: '') {
         // some block
-            sh "docker push vishwacloudlab/tomcat-b15:latest"
+            sh "sudo docker push vishwacloudlab/tomcat-b15:latest"
             }
+          }
         }
         stage ("Cleanup the previous Docker Image and container") {
             input {
                     message 'Can we Delete the Docker image and Container'
             }
             steps {
-                sh "docker rm cont01 -f"
-                sh "docker image rmi vishwacloudlab/tomcat-b15 -f"
+                sh "sudo docker rm cont01 -f"
+                sh "sudo docker image rmi vishwacloudlab/tomcat-b15 -f"
         //sh "mvn clean"
             }
         }
