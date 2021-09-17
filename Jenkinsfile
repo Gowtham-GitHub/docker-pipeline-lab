@@ -20,12 +20,12 @@ pipeline {
         }
         stage ("Build the Docker Image") {
             steps {
-                sh "sudo docker build . -t vishwacloudlab/tomcat-b15"
+                sh "sudo docker build . -t gowtham994433/tomcat-b15"
             }
         }
         stage ("Run the Container") {
             steps {
-                sh "sudo docker run -d -p 90:8080 --name cont01 vishwacloudlab/tomcat-b15"
+                sh "sudo docker run -d -p 90:8080 --name cont01 gowtham994433/tomcat-b15"
             }
         }
       //  stage ("Check the webpage") {
@@ -37,7 +37,7 @@ pipeline {
         stage ("Push to Docker HUB") {
             steps {
         // some block
-            sh "sudo docker push vishwacloudlab/tomcat-b15:latest"
+            sh "sudo docker push gowtham994433/tomcat-b15:latest"
             }
         }
         stage ("Cleanup the previous Docker Image and container") {
@@ -46,7 +46,7 @@ pipeline {
             }
             steps {
                 sh "sudo docker rm cont01 -f"
-                sh "sudo docker image rmi vishwacloudlab/tomcat-b15 -f"
+                sh "sudo docker image rmi gowtham994433/tomcat-b15 -f"
         //sh "mvn clean"
             }
         }
