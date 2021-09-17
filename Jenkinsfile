@@ -36,10 +36,8 @@ pipeline {
       //  }
         stage ("Push to Docker HUB") {
             steps {
-        withDockerRegistry(credentialsId: 'DockerHub', url: '') {
         // some block
             sh "docker push vishwacloudlab/tomcat-b15:latest"
-        }
             }
         }
         stage ("Cleanup the previous Docker Image and container") {
